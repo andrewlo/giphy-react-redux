@@ -33,43 +33,22 @@ function mapDispatchToProps(dispatch) {
 class App extends React.Component<IAppProps, void> {
   render() {
     const { children, session, login, logout } = this.props;
-    const token = session.token || false;
-    const isLoggedIn = token && token !== null && typeof token !== 'undefined';
-    const firstName = session.user.first || '';
-    const lastName = session.user.last || '';
 
     return (
       <div>
-        <LoginModal
-          onSubmit={ login }
-          isPending={ session.isLoading || false }
-          hasError={ session.hasError || false }
-          isVisible={ !isLoggedIn } />
         <Navigator testid="navigator">
           <NavigatorItem mr>
             <Logo />
           </NavigatorItem>
-          <NavigatorItem isVisible={ isLoggedIn } mr>
-            <Link to="/">Counter</Link>
+          <NavigatorItem mr>
+            <Link to="/">Search</Link>
           </NavigatorItem>
-          <NavigatorItem isVisible={ isLoggedIn }>
+          <NavigatorItem >
             <Link to="/about">About Us</Link>
           </NavigatorItem>
           <div className="flex flex-auto"></div>
-          <NavigatorItem isVisible={ isLoggedIn } mr>
-            <div
-              data-testid="user-profile"
-              className="h3">
-              { `${ firstName } ${ lastName }` }
-            </div>
-          </NavigatorItem>
-          <NavigatorItem isVisible={ isLoggedIn }>
-            <Button onClick={ logout } className="bg-red white">
-              Logout
-            </Button>
-          </NavigatorItem>
         </Navigator>
-        <Content isVisible={ isLoggedIn }>
+        <Content isVisible={ true }>
           { children }
         </Content>
       </div>

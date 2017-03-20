@@ -64,7 +64,7 @@ function _enableHotLoader(store) {
 
 function _getStorageConfig() {
   return {
-    key: 'typescript-react-redux-seed',
+    key: 'giphy-react-redux-seed',
     serialize: (store) => {
       return store && store.session ?
         JSON.stringify(store.session) : store;

@@ -3,12 +3,12 @@ const { IndexRoute, Route } = require('react-router');
 
 import App from '../containers/app';
 import AboutPage from '../containers/about-page';
-import CounterPage from '../containers/counter-page';
+import SearchPage from '../containers/search-page';
 
 
 export default (
   <Route path="/" component={ App }>
-    <IndexRoute component={ CounterPage }/>
+    <IndexRoute component={ SearchPage }/>
     <Route path="about" component={ AboutPage }/>
   </Route>
 );
