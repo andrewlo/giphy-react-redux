@@ -3,6 +3,8 @@
 
 Giphy search app in React.
 
+Live deployment here: https://al-giphy-search.herokuapp.com/
+
 ## npm scripts
 
 ### Dev
