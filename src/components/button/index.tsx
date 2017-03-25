@@ -7,6 +7,7 @@ interface IButtonProps extends React.Props<any> {
   className?: string;
   id?: string;
   testid?: string;
+  isLoading?: boolean;
 };
 
 export default function Button({
@@ -15,7 +16,8 @@ export default function Button({
   className = '',
   id = '',
   testid = '',
-  children = null
+  children = null,
+  isLoading = false
 }: IButtonProps) {
   const buttonClasses = classNames('btn', 'btn-primary', className);
 
@@ -25,6 +27,7 @@ export default function Button({
       id={ id }
       type={ type }
       className={ buttonClasses }
+      disabled={ isLoading }
       onClick={ onClick }>
       { children }
     </button>

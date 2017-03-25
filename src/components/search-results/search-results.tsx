@@ -10,6 +10,10 @@ export default function SearchResults({
   results,
 }: ISearchResultsProps) {
 
+  if (!results) {
+    return null;
+  }
+
   const listItems = results
     .filter((result) => result.images && result.images.preview_gif && result.images.preview_gif.url)
     .map((result) =>
@@ -19,7 +23,7 @@ export default function SearchResults({
 
   return (
     <div>
-      <h1>Search results</h1>
+      <h3>Search results</h3>
       { listItems }
     </div>
   );

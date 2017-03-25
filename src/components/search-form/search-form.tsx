@@ -12,8 +12,7 @@ import Alert from '../alert';
 interface ISearchFormProps {
   onSubmit: () => void;
   handleSubmit?: () => void;
-  resetForm?: () => void;
-  isPending: boolean;
+  isLoading: boolean;
   hasError: boolean;
   fields?: {
     term: any;
@@ -26,8 +25,7 @@ class SearchForm extends React.Component<ISearchFormProps, void> {
   render() {
     const {
       handleSubmit,
-      resetForm,
-      isPending,
+      isLoading,
       hasError,
       fields: {
         term,
@@ -37,11 +35,6 @@ class SearchForm extends React.Component<ISearchFormProps, void> {
     return (
       <Form handleSubmit={ handleSubmit }>
         <Alert
-          testid="alert-loading"
-          isVisible={ isPending }>
-          Loading...
-        </Alert>
-        <Alert
           testid="alert-error"
           id="qa-alert"
           isVisible={ hasError }
@@ -49,27 +42,22 @@ class SearchForm extends React.Component<ISearchFormProps, void> {
           Search Error
         </Alert>
 
-        <FormGroup testid="search-term">
+        <FormGroup>
           <FormLabel id="qa-search-label">Search</FormLabel>
-          <Input
-            type="text" fieldDefinition={ term }
-            id="qa-search-input"
-            placeholder="Search"/>
+          <div className="flex">
+            <Input
+              type="text" fieldDefinition={ term }
+              id="qa-search-input"
+              placeholder="Search"/>
+            <Button type="submit" className="ml1 mb1 col-2" isLoading={ isLoading }>
+              { !isLoading ? 'Search' : 'Searching...' }
+            </Button>
+          </div>
           <FormError id="qa-search-validation"
             isVisible={ !!(term.touched && term.error) }>
             { term.error }
           </FormError>
-        </FormGroup>
 
-        <FormGroup testid="login-submit">
-          <Button type="submit" className="mr1" id="qa-login-button">
-            Search
-          </Button>
-          <Button onClick={ resetForm }
-            type="reset"
-            className="bg-red" id="qa-clear-button">
-            Clear
-          </Button>
         </FormGroup>
       </Form>
     );

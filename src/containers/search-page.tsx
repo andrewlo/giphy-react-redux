@@ -3,7 +3,7 @@ const connect = require('react-redux').connect;
 
 import { giphySearch } from '../actions/giphy';
 
-import SearchResults from '../components/search-results';
+import SearchResults from '../components/search-results/search-results';
 import SearchForm from '../components/search-form/search-form';
 import { GiphySearchResult } from '../types/giphy-search-result';
 
@@ -47,11 +47,11 @@ class SearchPage extends React.Component<ISearchPageProps, void> {
     const { searchResults, isLoading, hasError } = this.props;
 
     return (
-      <div>
+      <div className="p2">
         <SearchForm onSubmit={ this.onSubmit }
-          isPending={ isLoading }
+          isLoading={ isLoading }
           hasError={ hasError } />
-        { searchResults ? <SearchResults results={ searchResults }/> : <div>Loading...</div>}
+        <SearchResults results={ searchResults }/>
       </div>
     );
 
