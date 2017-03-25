@@ -13,6 +13,7 @@ interface ISearchPageProps extends React.Props<any> {
   giphySearch: (term: string, pageNum?: number) => void;
   searchResults: GiphySearchResult[];
   isLoading: boolean;
+  isLoadingMore: boolean;
   hasError: boolean;
   term: string;
   pageNum: number;
@@ -23,6 +24,7 @@ function mapStateToProps(state) {
   return {
     searchResults: state.giphy.searchResults,
     isLoading: state.giphy.isLoading,
+    isLoadingMore: state.giphy.isLoadingMore,
     hasError: state.giphy.hasError,
     term: state.giphy.term,
     pageNum: state.giphy.pageNum,
@@ -57,11 +59,11 @@ class SearchPage extends React.Component<ISearchPageProps, void> {
   }
 
   render() {
-    const { searchResults, isLoading, hasError } = this.props;
+    const { searchResults, isLoading, isLoadingMore, hasError } = this.props;
 
     const loadMore = this.props.canLoadMore && (
-      <Button onClick={ this.onNext } isLoading={ isLoading }>
-        { !isLoading ? 'More' : 'Loading...' }
+      <Button onClick={ this.onNext } isLoading={ isLoadingMore }>
+        { !isLoadingMore ? 'More' : 'Loading...' }
       </Button>);
 
     return (

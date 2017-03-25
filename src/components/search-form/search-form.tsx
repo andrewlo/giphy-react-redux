@@ -49,7 +49,7 @@ class SearchForm extends React.Component<ISearchFormProps, void> {
               type="text" fieldDefinition={ term }
               id="qa-search-input"
               placeholder="Search"/>
-            <Button type="submit" className="ml1 mb1 col-2" isLoading={ isLoading }>
+            <Button type="submit" className="ml1 mb1" isLoading={ isLoading }>
               { !isLoading ? 'Search' : 'Searching...' }
             </Button>
           </div>

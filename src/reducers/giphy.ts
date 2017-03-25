@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   searchResults: [],
   hasError: false,
   isLoading: false,
+  isLoadingMore: false,
   term: null,
   pageNum: 0,
   canLoadMore: false,
@@ -23,7 +24,8 @@ function giphyReducer(state = INITIAL_STATE,
     return update(state, { $merge: {
       searchResults: state.term === action.payload.term ? state.searchResults : [],
       hasError: false,
-      isLoading: true,
+      isLoading: action.payload.pageNum === 0,
+      isLoadingMore: action.payload.pageNum > 0,
       term: action.payload.term,
       pageNum: action.payload.pageNum,
     }});
@@ -35,6 +37,7 @@ function giphyReducer(state = INITIAL_STATE,
       searchResults: state.searchResults.concat(action.payload.data),
       hasError: false,
       isLoading: false,
+      isLoadingMore: false,
       canLoadMore: count + offset < total_count
 
     }});
@@ -43,6 +46,7 @@ function giphyReducer(state = INITIAL_STATE,
     return update(state, { $merge: {
       hasError: true,
       isLoading: false,
+      isLoadingMore: false,
       term: null,
       pageNum: 0,
       canLoadMore: false
