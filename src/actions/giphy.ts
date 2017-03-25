@@ -5,7 +5,7 @@ import {
   GIPHY_SEARCH_ERROR,
 } from '../constants';
 
-export function giphySearch(term: string) {
+export function giphySearch(term: string, pageNum: number = 0) {
   return (dispatch, getState) => {
 
     return dispatch({
@@ -15,7 +15,8 @@ export function giphySearch(term: string) {
         GIPHY_SEARCH_ERROR,
       ],
       payload: {
-        promise: search(term),
+        promise: search(term, pageNum),
+        data: { term, pageNum },
       },
     });
   };

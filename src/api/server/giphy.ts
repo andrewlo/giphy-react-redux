@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 
 export const BASE_URL = 'http://api.giphy.com/v1/gifs'; 
 
-export function get(path) {
+export function get(path): any {
   return fetch(BASE_URL + path, {
     method: 'get',
     headers: {

@@ -7,9 +7,12 @@ import {
 } from '../constants';
 
 const INITIAL_STATE = {
-  searchResults: null,
+  searchResults: [],
   hasError: false,
   isLoading: false,
+  term: null,
+  pageNum: 0,
+  canLoadMore: false,
 };
 
 function giphyReducer(state = INITIAL_STATE,
@@ -18,22 +21,31 @@ function giphyReducer(state = INITIAL_STATE,
 
   case GIPHY_SEARCH_PENDING:
     return update(state, { $merge: {
-      searchResults: null,
+      searchResults: state.term === action.payload.term ? state.searchResults : [],
       hasError: false,
       isLoading: true,
+      term: action.payload.term,
+      pageNum: action.payload.pageNum,
     }});
 
   case GIPHY_SEARCH_SUCCESS:
+    const { count, offset, total_count } = action.payload.pagination;
+
     return update(state, { $merge: {
-      searchResults: action.payload,
+      searchResults: state.searchResults.concat(action.payload.data),
       hasError: false,
       isLoading: false,
+      canLoadMore: count + offset < total_count
+
     }});
 
   case GIPHY_SEARCH_ERROR:
     return update(state, { $merge: {
       hasError: true,
       isLoading: false,
+      term: null,
+      pageNum: 0,
+      canLoadMore: false
     }});
 
   default:

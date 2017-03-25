@@ -5,13 +5,18 @@ import { giphySearch } from '../actions/giphy';
 
 import SearchResults from '../components/search-results/search-results';
 import SearchForm from '../components/search-form/search-form';
+import Button from '../components/button';
+
 import { GiphySearchResult } from '../types/giphy-search-result';
 
 interface ISearchPageProps extends React.Props<any> {
-  giphySearch: (term: string) => void;
+  giphySearch: (term: string, pageNum?: number) => void;
   searchResults: GiphySearchResult[];
   isLoading: boolean;
   hasError: boolean;
+  term: string;
+  pageNum: number;
+  canLoadMore: boolean;
 };
 
 function mapStateToProps(state) {
@@ -19,12 +24,15 @@ function mapStateToProps(state) {
     searchResults: state.giphy.searchResults,
     isLoading: state.giphy.isLoading,
     hasError: state.giphy.hasError,
+    term: state.giphy.term,
+    pageNum: state.giphy.pageNum,
+    canLoadMore: state.giphy.canLoadMore,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    giphySearch: (term: string): void => dispatch(giphySearch(term))
+    giphySearch: (term: string, pageNum?: number): void => dispatch(giphySearch(term, pageNum))
   };
 }
 
@@ -33,6 +41,7 @@ class SearchPage extends React.Component<ISearchPageProps, void> {
   constructor() {
     super();
     this.onSubmit = this.onSubmit.bind(this);
+    this.onNext = this.onNext.bind(this);
   }
 
   componentDidMount() {
@@ -43,8 +52,17 @@ class SearchPage extends React.Component<ISearchPageProps, void> {
     this.props.giphySearch(event.term);
   }
 
+  onNext() {
+    this.props.giphySearch(this.props.term, this.props.pageNum + 1);
+  }
+
   render() {
     const { searchResults, isLoading, hasError } = this.props;
+
+    const loadMore = this.props.canLoadMore && (
+      <Button onClick={ this.onNext } isLoading={ isLoading }>
+        { !isLoading ? 'More' : 'Loading...' }
+      </Button>);
 
     return (
       <div className="p2">
@@ -52,6 +70,7 @@ class SearchPage extends React.Component<ISearchPageProps, void> {
           isLoading={ isLoading }
           hasError={ hasError } />
         <SearchResults results={ searchResults }/>
+        { loadMore }
       </div>
     );
 

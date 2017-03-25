@@ -1,11 +1,13 @@
 import { get } from '../server/giphy';
 
 const publicKey = 'dc6zaTOxFJmzC';
+const pageSize = 25;
 
-export function search(term: string) {
+export function search(term: string, pageNum: number = 0) {
+  const offset = pageNum * pageSize;
   return new Promise((resolve, reject) => {
-    return get(`/search?q=${term}&api_key=${publicKey}`)
-      .then(json => resolve(json.data))
+    return get(`/search?q=${term}&offset=${offset}&limit=${pageSize}&api_key=${publicKey}`)
+      .then(json => resolve(json))
       .then(null, (err) => reject(new Error()));
   });
 }
