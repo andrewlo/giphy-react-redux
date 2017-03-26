@@ -34,7 +34,7 @@ function giphyReducer(state = INITIAL_STATE,
     const { count, offset, total_count } = action.payload.pagination;
 
     return update(state, { $merge: {
-      searchResults: state.searchResults.concat(action.payload.data),
+      searchResults: [...state.searchResults, ...action.payload.data],
       hasError: false,
       isLoading: false,
       isLoadingMore: false,

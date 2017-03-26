@@ -40,21 +40,15 @@ function mapDispatchToProps(dispatch) {
 
 class SearchPage extends React.Component<ISearchPageProps, void> {
 
-  constructor() {
-    super();
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onNext = this.onNext.bind(this);
-  }
-
   componentDidMount() {
     this.props.giphySearch('kittens');
   }
 
-  onSubmit(event) {
+  onSubmit = (event) => {
     this.props.giphySearch(event.term);
   }
 
-  onNext() {
+  onNext = () => {
     this.props.giphySearch(this.props.term, this.props.pageNum + 1);
   }
 
