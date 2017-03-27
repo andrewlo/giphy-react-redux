@@ -11,3 +11,11 @@ export function search(term: string, pageNum: number = 0) {
       .then(null, (err) => reject(new Error()));
   });
 }
+
+export function details(id: string) {
+  return new Promise((resolve, reject) => {
+    return get(`/${id}?api_key=${publicKey}`)
+      .then(json => resolve(json))
+      .then(null, (err) => reject(new Error()));
+  });
+}

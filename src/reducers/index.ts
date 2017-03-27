@@ -4,12 +4,14 @@ const formReducer = require('redux-form').reducer;
 
 import counter from './counter';
 import session from './session';
-import giphy from './giphy';
+import search from './search';
+import details from './details';
 
 const rootReducer = combineReducers({
   session,
   counter,
-  giphy,
+  search,
+  details,
   routing: routerReducer,
   form: formReducer,
 });

@@ -3,15 +3,15 @@ const connect = require('react-redux').connect;
 
 import { giphySearch } from '../actions/giphy';
 
-import SearchResults from '../components/search-results/search-results';
+import GifList from '../components/gif-list/gif-list';
 import SearchForm from '../components/search-form/search-form';
 import Button from '../components/button';
 
-import { GiphySearchResult } from '../types/giphy-search-result';
+import { GiphyGif } from '../types/giphy-gif';
 
 interface ISearchPageProps extends React.Props<any> {
   giphySearch: (term: string, pageNum?: number) => void;
-  searchResults: GiphySearchResult[];
+  searchResults: GiphyGif[];
   isLoading: boolean;
   isLoadingMore: boolean;
   hasError: boolean;
@@ -22,13 +22,13 @@ interface ISearchPageProps extends React.Props<any> {
 
 function mapStateToProps(state) {
   return {
-    searchResults: state.giphy.searchResults,
-    isLoading: state.giphy.isLoading,
-    isLoadingMore: state.giphy.isLoadingMore,
-    hasError: state.giphy.hasError,
-    term: state.giphy.term,
-    pageNum: state.giphy.pageNum,
-    canLoadMore: state.giphy.canLoadMore,
+    searchResults: state.search.searchResults,
+    isLoading: state.search.isLoading,
+    isLoadingMore: state.search.isLoadingMore,
+    hasError: state.search.hasError,
+    term: state.search.term,
+    pageNum: state.search.pageNum,
+    canLoadMore: state.search.canLoadMore,
   };
 }
 
@@ -65,7 +65,7 @@ class SearchPage extends React.Component<ISearchPageProps, void> {
         <SearchForm onSubmit={ this.onSubmit }
           isLoading={ isLoading }
           hasError={ hasError } />
-        <SearchResults results={ searchResults }/>
+        <GifList list={ searchResults } />
         { loadMore }
       </div>
     );

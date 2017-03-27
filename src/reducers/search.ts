@@ -16,8 +16,8 @@ const INITIAL_STATE = {
   canLoadMore: false,
 };
 
-function giphyReducer(state = INITIAL_STATE,
-                        action = { type: '', payload: null }) {
+function searchReducer(state = INITIAL_STATE,
+                       action = { type: '', payload: null }) {
   switch (action.type) {
 
   case GIPHY_SEARCH_PENDING:
@@ -57,4 +57,4 @@ function giphyReducer(state = INITIAL_STATE,
   }
 }
 
-export default giphyReducer;
+export default searchReducer;

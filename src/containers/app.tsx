@@ -9,6 +9,7 @@ import LoginModal from '../components/login/login-modal';
 import Logo from '../components/logo';
 import Navigator from '../components/navigator';
 import NavigatorItem from '../components/navigator-item';
+import GifDetailsSideBar from '../components/gif-details-side-bar/gif-details-side-bar';
 
 interface IAppProps extends React.Props<any> {
   session: any;
@@ -51,6 +52,7 @@ class App extends React.Component<IAppProps, void> {
         <Content isVisible={ true }>
           { children }
         </Content>
+        <GifDetailsSideBar></GifDetailsSideBar>
       </div>
     );
   };
