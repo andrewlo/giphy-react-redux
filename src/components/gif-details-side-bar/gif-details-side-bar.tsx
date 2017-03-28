@@ -25,7 +25,7 @@ function GifDetailsSideBar({
 }: IGifDetailsSideBarProps) {
 
   const gif = details && <img src={details.images.original.url} />;
-  const open = !!details;
+  const open = !!details || isLoading;
 
   return (
     <SideBar open={open}>
