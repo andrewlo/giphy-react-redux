@@ -17,7 +17,7 @@ export default function GifList({
   }
 
   const listItems = list
-    .map((listItem) => <GifListItem key={ listItem.id } result={listItem} />);
+    .map((listItem) => <GifListItem key={ listItem.id } gif={listItem} />);
 
   return (
     <div>

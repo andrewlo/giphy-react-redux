@@ -16,13 +16,22 @@ export default function SideBar({
 }: ISideBarProps) {
   const styles = {
     boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.2)',
-    transition: 'all 0.5s ease-in',
-    width: open ? '400px' : '0',
+    transition: 'all 0.3s ease-in',
+    width: '400px',
+    transform: open ? 'translateX(0%)' : 'translateX(100%)',
+    visibility: open ? 'visible' : 'hidden',
+  };
+
+  const closeStyles = {
+    cursor: 'pointer'
   };
 
   return (
     <div>
       <div className="fixed z2 top-0 bottom-0 right-0 bg-white" style={styles}>
+        <div className="flex justify-end p1">
+          <span style={ closeStyles } className="green" onClick={ onClose }>Close</span>
+        </div>
         { children }
       </div>
       <Backdrop show={ open }

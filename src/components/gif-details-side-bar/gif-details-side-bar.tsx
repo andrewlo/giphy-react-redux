@@ -7,30 +7,33 @@ import { GiphyGif } from '../../types/giphy-gif';
 
 import SideBar from '../side-bar/side-bar';
 
-import { selectGif } from '../../actions/giphy';
+import { sidebarClose } from '../../actions/ui';
 
 interface IGifDetailsSideBarProps extends React.Props<any> {
-  selectNone: () => void;
+  sidebarClose: () => void;
   details: GiphyGif;
   isLoading: boolean;
+  sidebarOpen: boolean;
 };
 
 function mapStateToProps(state) {
   return {
     details: state.details.gif,
     isLoading: state.details.isLoading,
+    sidebarOpen: state.ui.sidebarOpen,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    selectNone: (): void => dispatch(selectGif(null))
+    sidebarClose: (): void => dispatch(sidebarClose())
   };
 }
 function GifDetailsSideBar({
-  selectNone = null,
+  sidebarClose = null,
   details = null,
   isLoading = false,
+  sidebarOpen = false,
 }: IGifDetailsSideBarProps) {
 
   const gif = details && (
@@ -39,16 +42,9 @@ function GifDetailsSideBar({
       <a href={details.url} target="_blank">View in Giphy</a>
     </div>
   );
-  const open = !!details || isLoading;
-
-  const onClose = () => {
-    if (!isLoading) {
-      selectNone();
-    }
-  };
 
   return (
-    <SideBar open={open} onClose={onClose}>
+    <SideBar open={sidebarOpen} onClose={sidebarClose}>
       <div className="p2">
         { isLoading ? 'Loading...' : gif }
       </div>

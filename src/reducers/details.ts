@@ -1,14 +1,12 @@
 let update = require('immutability-helper');
 
 import {
-  SELECT_GIF,
   GIPHY_DETAILS_PENDING,
   GIPHY_DETAILS_SUCCESS,
   GIPHY_DETAILS_ERROR,
 } from '../constants';
 
 const INITIAL_STATE = {
-  selectedId: null,
   hasError: false,
   isLoading: false,
   gif: null,
@@ -17,12 +15,6 @@ const INITIAL_STATE = {
 function detailsReducer(state = INITIAL_STATE,
                        action = { type: '', payload: null }) {
   switch (action.type) {
-
-  case SELECT_GIF:
-    return update(state, { $merge: {
-      selectedId: action.payload,
-      gif: null,
-    }});
 
   case GIPHY_DETAILS_PENDING:
     return update(state, { $merge: {

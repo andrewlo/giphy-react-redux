@@ -4,17 +4,18 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 
 import { GiphyGif } from '../../types/giphy-gif';
-import { selectGif, giphyDetails } from '../../actions/giphy';
+import { giphyDetails } from '../../actions/giphy';
+import { sidebarOpen } from '../../actions/ui';
 
 interface IGifListItemProps extends React.Props<any> {
   selectGif: (id: string) => void;
-  result: GiphyGif;
+  gif: GiphyGif;
 };
 
 function mapDispatchToProps(dispatch) {
   return {
     selectGif: (id: string): void => {
-      dispatch(selectGif(id));
+      dispatch(sidebarOpen());
       dispatch(giphyDetails(id));
     }
   };
@@ -22,12 +23,12 @@ function mapDispatchToProps(dispatch) {
 
 function GifListItem({
   selectGif = null,
-  result = null,
+  gif = null,
   children = null,
 }: IGifListItemProps) {
 
   const onClick = () => {
-    selectGif(result.id);
+    selectGif(gif.id);
   };
 
   const style = {
@@ -36,7 +37,7 @@ function GifListItem({
 
   return (
     <img onClick={ onClick } style={ style }
-      src={ result.images.fixed_height.url }>
+      src={ gif.images.fixed_height.url }>
     </img>
   );
 }
