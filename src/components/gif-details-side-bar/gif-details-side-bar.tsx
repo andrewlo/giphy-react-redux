@@ -33,7 +33,12 @@ function GifDetailsSideBar({
   isLoading = false,
 }: IGifDetailsSideBarProps) {
 
-  const gif = details && <img src={details.images.original.url} />;
+  const gif = details && (
+    <div className="flex flex-column items-center">
+      <img src={details.images.original.url} className="mb2" />
+      <a href={details.url} target="_blank">View in Giphy</a>
+    </div>
+  );
   const open = !!details || isLoading;
 
   const onClose = () => {

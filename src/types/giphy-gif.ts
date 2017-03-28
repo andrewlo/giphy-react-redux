@@ -9,4 +9,5 @@ export interface GiphyGif {
       url: string;
     }
   };
+  url: string;
 };
