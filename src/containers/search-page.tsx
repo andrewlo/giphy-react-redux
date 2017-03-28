@@ -56,7 +56,7 @@ class SearchPage extends React.Component<ISearchPageProps, void> {
     const { searchResults, isLoading, isLoadingMore, hasError } = this.props;
 
     const loadMore = this.props.canLoadMore && (
-      <Button onClick={ this.onNext } isLoading={ isLoadingMore }>
+      <Button className="mt2 black bg-silver" onClick={ this.onNext } isLoading={ isLoadingMore }>
         { !isLoadingMore ? 'More' : 'Loading...' }
       </Button>);
 

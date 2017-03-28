@@ -8,7 +8,7 @@ export default function Logo() {
     <div className="flex items-center">
       <img style={ styles }
         src={ LogoImage }
-        alt="Rangle.io" />
+        alt="Giphy React" />
     </div>
   );
 }

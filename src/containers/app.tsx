@@ -34,6 +34,11 @@ function mapDispatchToProps(dispatch) {
 class App extends React.Component<IAppProps, void> {
   render() {
     const { children, session, login, logout } = this.props;
+    const linkClass = 'black';
+    const linkActiveClass = 'green';
+    const linkStyle = {
+      textDecoration: 'none'
+    };
 
     return (
       <div>
@@ -42,10 +47,16 @@ class App extends React.Component<IAppProps, void> {
             <Logo />
           </NavigatorItem>
           <NavigatorItem mr>
-            <Link to="/">Search</Link>
+            <Link to="/" className={linkClass} style={linkStyle}
+              onlyActiveOnIndex activeClassName={linkActiveClass}>
+              Search
+            </Link>
           </NavigatorItem>
           <NavigatorItem >
-            <Link to="/about">About Us</Link>
+            <Link to="/about" className={linkClass} style={linkStyle}
+              activeClassName={linkActiveClass}>
+              About
+            </Link>
           </NavigatorItem>
           <div className="flex flex-auto"></div>
         </Navigator>
