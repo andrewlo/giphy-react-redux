@@ -10,6 +10,9 @@ return (
       <p>
         Giphy search app for learning React with Redux & Typescript.
       </p>
+      <p>
+        <a href="https://github.com/andrewlo/giphy-react-redux">GitHub</a>
+      </p>
     </Container>
   );
 }

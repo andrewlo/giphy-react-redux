@@ -9,8 +9,6 @@ import { routerMiddleware } from 'react-router-redux';
 
 import thunk from 'redux-thunk';
 
-const persistState = require('redux-localstorage');
-
 import promiseMiddleware from '../middleware/promise-middleware';
 import logger from './logger';
 import rootReducer from '../reducers';
@@ -23,7 +21,6 @@ function configureStore(initialState) {
     initialState,
     compose(
       applyMiddleware(..._getMiddleware()),
-      persistState('session', _getStorageConfig()),
       __DEV__ && environment.devToolsExtension ?
         environment.devToolsExtension() :
         f => f));
@@ -60,19 +57,6 @@ function _enableHotLoader(store) {
       store.replaceReducer(nextRootReducer);
     });
   }
-}
-
-function _getStorageConfig() {
-  return {
-    key: 'giphy-react-redux-seed',
-    serialize: (store) => {
-      return store && store.session ?
-        JSON.stringify(store.session) : store;
-    },
-    deserialize: (state) => ({
-      session: state ? JSON.parse(state) : {},
-    }),
-  };
 }
 
 export default configureStore;
