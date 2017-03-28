@@ -21,11 +21,13 @@ function searchReducer(state = INITIAL_STATE,
   switch (action.type) {
 
   case GIPHY_SEARCH_PENDING:
+    const loadingMore = action.payload.pageNum > 0;
+
     return update(state, { $merge: {
-      searchResults: state.term === action.payload.term ? state.searchResults : [],
+      searchResults: loadingMore ? state.searchResults : [],
       hasError: false,
-      isLoading: action.payload.pageNum === 0,
-      isLoadingMore: action.payload.pageNum > 0,
+      isLoading: !loadingMore,
+      isLoadingMore: loadingMore,
       term: action.payload.term,
       pageNum: action.payload.pageNum,
     }});
