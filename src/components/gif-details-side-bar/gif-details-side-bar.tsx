@@ -7,7 +7,10 @@ import { GiphyGif } from '../../types/giphy-gif';
 
 import SideBar from '../side-bar/side-bar';
 
+import { selectGif } from '../../actions/giphy';
+
 interface IGifDetailsSideBarProps extends React.Props<any> {
+  selectNone: () => void;
   details: GiphyGif;
   isLoading: boolean;
 };
@@ -19,7 +22,13 @@ function mapStateToProps(state) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    selectNone: (): void => dispatch(selectGif(null))
+  };
+}
 function GifDetailsSideBar({
+  selectNone = null,
   details = null,
   isLoading = false,
 }: IGifDetailsSideBarProps) {
@@ -27,8 +36,14 @@ function GifDetailsSideBar({
   const gif = details && <img src={details.images.original.url} />;
   const open = !!details || isLoading;
 
+  const onClose = () => {
+    if (!isLoading) {
+      selectNone();
+    }
+  };
+
   return (
-    <SideBar open={open}>
+    <SideBar open={open} onClose={onClose}>
       <div className="p2">
         { isLoading ? 'Loading...' : gif }
       </div>
@@ -38,4 +53,5 @@ function GifDetailsSideBar({
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(GifDetailsSideBar);

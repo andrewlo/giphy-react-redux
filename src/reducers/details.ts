@@ -21,6 +21,7 @@ function detailsReducer(state = INITIAL_STATE,
   case SELECT_GIF:
     return update(state, { $merge: {
       selectedId: action.payload,
+      gif: null,
     }});
 
   case GIPHY_DETAILS_PENDING:
