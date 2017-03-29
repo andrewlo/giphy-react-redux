@@ -6,6 +6,7 @@ import * as classNames from 'classnames';
 import { GiphyGif } from '../../types/giphy-gif';
 
 import SideBar from '../side-bar/side-bar';
+import Spinner from '../spinner/spinner';
 
 import { sidebarClose } from '../../actions/ui';
 
@@ -46,7 +47,7 @@ function GifDetailsSideBar({
   return (
     <SideBar open={sidebarOpen} onClose={sidebarClose}>
       <div className="p2">
-        { isLoading ? 'Loading...' : gif }
+        { isLoading ? <Spinner/> : gif }
       </div>
     </SideBar>
   );
