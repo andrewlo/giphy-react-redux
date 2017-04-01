@@ -2,7 +2,6 @@ import * as React from 'react';
 const connect = require('react-redux').connect;
 const Link = require('react-router').Link;
 
-import { loginUser, logoutUser } from '../actions/session';
 import Button from '../components/button';
 import Content from '../components/content';
 import LoginModal from '../components/login/login-modal';
@@ -12,28 +11,18 @@ import NavigatorItem from '../components/navigator-item';
 import GifDetailsSideBar from '../components/gif-details-side-bar/gif-details-side-bar';
 
 interface IAppProps extends React.Props<any> {
-  session: any;
-  login: () => void;
-  logout: () => void;
+
 };
 
 function mapStateToProps(state) {
   return {
-    session: state.session,
     router: state.router,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    login: () => dispatch(loginUser()),
-    logout: () => dispatch(logoutUser()),
   };
 }
 
 class App extends React.Component<IAppProps, void> {
   render() {
-    const { children, session, login, logout } = this.props;
+    const { children } = this.props;
     const linkClass = 'black';
     const linkActiveClass = 'green';
     const linkStyle = {
@@ -49,13 +38,13 @@ class App extends React.Component<IAppProps, void> {
           <NavigatorItem mr>
             <Link to="/" className={linkClass} style={linkStyle}
               onlyActiveOnIndex activeClassName={linkActiveClass}>
-              Search
+              <i className="fa fa-search fa-lg mr1"></i>Search
             </Link>
           </NavigatorItem>
           <NavigatorItem >
             <Link to="/about" className={linkClass} style={linkStyle}
               activeClassName={linkActiveClass}>
-              About
+              <i className="fa fa-user fa-lg mr1"></i>About
             </Link>
           </NavigatorItem>
           <div className="flex flex-auto"></div>
@@ -71,5 +60,4 @@ class App extends React.Component<IAppProps, void> {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
 )(App);

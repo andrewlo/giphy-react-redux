@@ -30,7 +30,9 @@ export default function SideBar({
     <div>
       <div className="fixed z2 top-0 bottom-0 right-0 bg-white" style={styles}>
         <div className="flex justify-end p1">
-          <span style={ closeStyles } className="green" onClick={ onClose }>Close</span>
+          <span style={ closeStyles } className="green" onClick={ onClose }>
+            Close <i className="fa fa-times fa-lg"></i>
+          </span>
         </div>
         { children }
       </div>
