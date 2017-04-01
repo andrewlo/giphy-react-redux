@@ -6,6 +6,7 @@ import { giphyTrending } from '../actions/giphy';
 import GifList from '../components/gif-list/gif-list';
 import Button from '../components/button';
 import Spinner from '../components/spinner/spinner';
+import Alert from '../components/alert';
 
 import { GiphyGif } from '../types/giphy-gif';
 
@@ -40,10 +41,17 @@ class TrendingPage extends React.Component<ITrendingPageProps, void> {
   render() {
     const { trendingResults, isLoading, hasError } = this.props;
 
+    const errorAlert = (
+      <Alert isVisible={ hasError }
+        status="error">
+        Error getting trending GIFs
+      </Alert>);
+
     const spinner = isLoading && <Spinner/>;
 
     return (
       <div className="p2">
+        { errorAlert }
         <GifList list={ trendingResults } />
         { spinner }
       </div>
