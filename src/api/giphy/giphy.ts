@@ -19,3 +19,11 @@ export function details(id: string) {
       .then(null, (err) => reject(new Error()));
   });
 }
+
+export function trending() {
+  return new Promise((resolve, reject) => {
+    return get(`/trending?api_key=${publicKey}`)
+      .then(json => resolve(json))
+      .then(null, (err) => reject(new Error()));
+  });
+}

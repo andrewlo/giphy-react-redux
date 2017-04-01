@@ -41,6 +41,12 @@ class App extends React.Component<IAppProps, void> {
               <i className="fa fa-search fa-lg mr1"></i>Search
             </Link>
           </NavigatorItem>
+          <NavigatorItem mr>
+            <Link to="/trending" className={linkClass} style={linkStyle}
+              onlyActiveOnIndex activeClassName={linkActiveClass}>
+              <i className="fa fa-fire fa-lg mr1"></i>Trending
+            </Link>
+          </NavigatorItem>
           <NavigatorItem >
             <Link to="/about" className={linkClass} style={linkStyle}
               activeClassName={linkActiveClass}>

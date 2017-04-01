@@ -1,4 +1,4 @@
-import { search, details } from '../api/giphy/giphy';
+import { search, details, trending } from '../api/giphy/giphy';
 import {
   GIPHY_SEARCH_PENDING,
   GIPHY_SEARCH_SUCCESS,
@@ -7,6 +7,10 @@ import {
   GIPHY_DETAILS_PENDING,
   GIPHY_DETAILS_SUCCESS,
   GIPHY_DETAILS_ERROR,
+
+  GIPHY_TRENDING_PENDING,
+  GIPHY_TRENDING_SUCCESS,
+  GIPHY_TRENDING_ERROR,
 } from '../constants';
 
 export function giphySearch(term: string, pageNum: number = 0) {
@@ -37,6 +41,22 @@ export function giphyDetails(id: string) {
       ],
       payload: {
         promise: details(id),
+      },
+    });
+  };
+}
+
+export function giphyTrending() {
+  return (dispatch, getState) => {
+
+    return dispatch({
+      types: [
+        GIPHY_TRENDING_PENDING,
+        GIPHY_TRENDING_SUCCESS,
+        GIPHY_TRENDING_ERROR,
+      ],
+      payload: {
+        promise: trending(),
       },
     });
   };
