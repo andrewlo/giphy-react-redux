@@ -45,11 +45,11 @@ class SearchForm extends React.Component<ISearchFormProps, void> {
         <FormGroup>
           <FormLabel id="qa-search-label">Search</FormLabel>
           <div className="flex">
-            <Input
+            <Input inputClasses="rounded-left"
               type="text" fieldDefinition={ term }
               id="qa-search-input"
               placeholder="Eg. Kittens"/>
-            <Button type="submit" className="bg-green ml1 mb1" isLoading={ isLoading }>
+            <Button type="submit" className="bg-green mb1 rounded-right" isLoading={ isLoading }>
               { !isLoading ? 'Search' : 'Searching...' }
             </Button>
           </div>

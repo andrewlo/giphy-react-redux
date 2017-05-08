@@ -12,13 +12,15 @@ interface IInputProps extends React.Props<any> {
   type?: string;
   placeholder?: string;
   id?: string;
+  inputClasses?: string;
 };
 
 export default function Input({
   type = 'text',
   placeholder = '',
   fieldDefinition = {} as IFieldDefinition,
-  id = ''
+  id = '',
+  inputClasses = ''
 }) {
   const {
     value,
@@ -27,10 +29,12 @@ export default function Input({
     onFocus
   } = fieldDefinition;
 
+  const classes = `block col-12 mb1 input ${inputClasses}`;
+
   return (
     <input
       id={ id }
-      className="block col-12 mb1 input"
+      className={ classes }
       type={ type }
       placeholder={ placeholder }
       value={ value }
