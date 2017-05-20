@@ -7,6 +7,7 @@ import { GiphyGif } from '../../types/giphy-gif';
 
 import SideBar from '../side-bar/side-bar';
 import Spinner from '../spinner/spinner';
+import GifImage from '../gif-image/gif-image';
 
 import { sidebarClose } from '../../actions/ui';
 
@@ -39,7 +40,9 @@ function GifDetailsSideBar({
 
   const gif = details && (
     <div className="flex flex-column items-center">
-      <img src={details.images.original.url} className="mb2" />
+      <div className="mb2">
+        <GifImage src={details.images.original.url}/>
+      </div>
       <a href={details.url} target="_blank">View in Giphy</a>
     </div>
   );

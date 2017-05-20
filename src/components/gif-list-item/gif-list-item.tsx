@@ -6,6 +6,7 @@ import * as classNames from 'classnames';
 import { GiphyGif } from '../../types/giphy-gif';
 import { giphyDetails } from '../../actions/giphy';
 import { sidebarOpen } from '../../actions/ui';
+import GifImage from '../gif-image/gif-image';
 
 interface IGifListItemProps extends React.Props<any> {
   selectGif: (id: string) => void;
@@ -32,13 +33,14 @@ function GifListItem({
   };
 
   const style = {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    display: 'inline-block'
   };
 
   return (
-    <img onClick={ onClick } style={ style }
-      src={ gif.images.fixed_height.url }>
-    </img>
+    <div onClick={ onClick } style={ style }>
+      <GifImage src={ gif.images.fixed_height.url }/>
+    </div>
   );
 }
 
