@@ -24,7 +24,7 @@ class App extends React.Component<IAppProps, void> {
   render() {
     const { children } = this.props;
     const linkClass = 'black';
-    const linkActiveClass = 'green';
+    const linkActiveClass = 'blue';
     const linkStyle = {
       textDecoration: 'none'
     };

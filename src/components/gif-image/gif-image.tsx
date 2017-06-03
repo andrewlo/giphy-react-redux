@@ -1,7 +1,9 @@
 import * as React from 'react';
 
+import { Image } from '../../types/giphy-gif';
+
 interface IGifImageProps {
-  src: string;
+  image: Image;
 };
 
 interface IGifImageState {
@@ -15,19 +17,42 @@ class GifImage extends React.Component<IGifImageProps, IGifImageState> {
       loading: true
     };
   }
+
+  randomBgColorClass() {
+    const colors = ['bg-teal', 'bg-aqua', 'bg-blue', 'bg-orange', 'bg-olive',
+      'bg-lime', 'bg-yellow', 'bg-navy'];
+    const index = Math.floor(Math.random() * colors.length);
+    return colors[index];
+  }
+
   render() {
+    const { url, width, height } = this.props.image;
+
+    const containerStyles = {
+      width: `${width}px`,
+      height: `${height}px`
+    };
+
+    const loadingStyles = {
+      width: `${width}px`,
+      height: `${height}px`,
+      opacity: 0.5
+    };
+    const bgColor = this.randomBgColorClass();
+
+    const loading = this.state.loading &&
+      <div className={ bgColor } style={ loadingStyles }></div>;
+
     const styles = {
       opacity: this.state.loading ? 0 : 1,
       transition: 'opacity 0.5s',
       height: this.state.loading ? 0 : 'auto',
       width: this.state.loading ? 0 : 'auto'
     };
-    const loading = this.state.loading && <div className="gray m3">Loading GIF...</div>;
-
     return (
-      <div className="center">
+      <div style={ containerStyles }>
         { loading }
-        <img src={ this.props.src } onLoad={ this.onLoad } style={ styles }/>
+        <img src={ url } onLoad={ this.onLoad } style={ styles }/>
       </div>
     );
   }

@@ -34,12 +34,12 @@ function GifListItem({
 
   const style = {
     cursor: 'pointer',
-    display: 'inline-block'
+    // display: 'inline-block'
   };
 
   return (
     <div onClick={ onClick } style={ style }>
-      <GifImage src={ gif.images.fixed_height.url }/>
+      <GifImage image={ gif.images.fixed_height }/>
     </div>
   );
 }

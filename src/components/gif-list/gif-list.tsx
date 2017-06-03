@@ -20,7 +20,7 @@ export default function GifList({
     .map((listItem) => <GifListItem key={ listItem.id } gif={ listItem } />);
 
   return (
-    <div>
+    <div className="flex flex-wrap">
       { listItems }
     </div>
   );

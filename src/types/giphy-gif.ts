@@ -1,13 +1,15 @@
 
+export interface Image {
+  url: string;
+  width: number;
+  height: number;
+}
+
 export interface GiphyGif {
   id: string;
   images: {
-    fixed_height: {
-      url: string;
-    },
-    original: {
-      url: string;
-    }
+    fixed_height: Image,
+    original: Image
   };
   url: string;
 };

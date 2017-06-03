@@ -41,7 +41,7 @@ function GifDetailsSideBar({
   const gif = details && (
     <div className="flex flex-column items-center">
       <div className="mb2">
-        <GifImage src={details.images.original.url}/>
+        <GifImage image={ details.images.original }/>
       </div>
       <a href={details.url} target="_blank">View in Giphy</a>
     </div>
