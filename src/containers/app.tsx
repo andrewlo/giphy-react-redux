@@ -23,8 +23,8 @@ function mapStateToProps(state) {
 class App extends React.Component<IAppProps, void> {
   render() {
     const { children } = this.props;
-    const linkClass = 'black';
-    const linkActiveClass = 'blue';
+    const linkClass = 'gray';
+    const linkActiveClass = 'teal';
     const linkStyle = {
       textDecoration: 'none'
     };
