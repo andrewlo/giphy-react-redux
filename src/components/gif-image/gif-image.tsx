@@ -4,6 +4,7 @@ import { Image } from '../../types/giphy-gif';
 
 interface IGifImageProps {
   image: Image;
+  setLoadingDimensions?: boolean;
 };
 
 interface IGifImageState {
@@ -29,13 +30,17 @@ class GifImage extends React.Component<IGifImageProps, IGifImageState> {
     const { url, width, height } = this.props.image;
 
     const containerStyles = {
-      width: `${width}px`,
-      height: `${height}px`
+      width: this.props.setLoadingDimensions ? `${width}px` : null,
+      height: this.props.setLoadingDimensions ? `${height}px` : null,
+      position: 'relative'
     };
 
     const loadingStyles = {
-      width: `${width}px`,
-      height: `${height}px`,
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
       opacity: 0.5
     };
     const bgColor = this.randomBgColorClass();
@@ -46,8 +51,6 @@ class GifImage extends React.Component<IGifImageProps, IGifImageState> {
     const styles = {
       opacity: this.state.loading ? 0 : 1,
       transition: 'opacity 0.5s',
-      height: this.state.loading ? 0 : 'auto',
-      width: this.state.loading ? 0 : 'auto'
     };
     return (
       <div style={ containerStyles }>
