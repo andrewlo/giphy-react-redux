@@ -4,7 +4,7 @@
   "description": "Giphy search app in TypeScript/React/Redux",
   "license": "MIT",
   "engines": {
-    "node": "6"
+    "node": "6.11.1"
   },
   "scripts": {
     "prebuild": "npm run clean",
