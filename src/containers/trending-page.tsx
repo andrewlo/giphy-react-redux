@@ -4,31 +4,34 @@ const connect = require('react-redux').connect;
 import { giphyTrending } from '../actions/giphy';
 
 import GifList from '../components/gif-list/gif-list';
-import Button from '../components/button';
-import Spinner from '../components/spinner/spinner';
 import Alert from '../components/alert';
 
 import { GiphyGif } from '../types/giphy-gif';
 
 interface ITrendingPageProps extends React.Props<any> {
-  giphyTrending: () => void;
+  giphyTrending: (pageNum?: number) => void;
   trendingResults: GiphyGif[];
   isLoading: boolean;
   isLoadingMore: boolean;
   hasError: boolean;
+  pageNum: number;
+  canLoadMore: boolean;
 };
 
 function mapStateToProps(state) {
   return {
     trendingResults: state.trending.trendingResults,
     isLoading: state.trending.isLoading,
+    isLoadingMore: state.trending.isLoadingMore,
     hasError: state.trending.hasError,
+    pageNum: state.trending.pageNum,
+    canLoadMore: state.trending.canLoadMore,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    giphyTrending: (): void => dispatch(giphyTrending())
+    giphyTrending: (pageNum?: number): void => dispatch(giphyTrending(pageNum))
   };
 }
 
@@ -38,8 +41,12 @@ class TrendingPage extends React.Component<ITrendingPageProps, void> {
     this.props.giphyTrending();
   }
 
+  onNext = () => {
+    this.props.giphyTrending(this.props.pageNum + 1);
+  }
+
   render() {
-    const { trendingResults, isLoading, hasError } = this.props;
+    const { trendingResults, isLoading, isLoadingMore, hasError, canLoadMore } = this.props;
 
     const errorAlert = (
       <Alert isVisible={ hasError }
@@ -47,13 +54,14 @@ class TrendingPage extends React.Component<ITrendingPageProps, void> {
         Error getting trending GIFs
       </Alert>);
 
-    const spinner = isLoading && <Spinner/>;
-
     return (
       <div className="p2">
         { errorAlert }
-        <GifList list={ trendingResults } />
-        { spinner }
+        <GifList list={ trendingResults }
+          isLoading={ isLoading }
+          isLoadingMore={ isLoadingMore }
+          canLoadMore={ canLoadMore }
+          onLoadMore={ this.onNext } />
       </div>
     );
 

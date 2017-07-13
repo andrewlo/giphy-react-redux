@@ -1,7 +1,7 @@
 import { get } from '../server/giphy';
 
 const publicKey = 'dc6zaTOxFJmzC';
-const pageSize = 25;
+const pageSize = 10;
 
 export function search(term: string, pageNum: number = 0) {
   const offset = pageNum * pageSize;
@@ -20,9 +20,10 @@ export function details(id: string) {
   });
 }
 
-export function trending() {
+export function trending(pageNum: number = 0) {
+  const offset = pageNum * pageSize;
   return new Promise((resolve, reject) => {
-    return get(`/trending?api_key=${publicKey}`)
+    return get(`/trending?api_key=${publicKey}&offset=${offset}&limit=${pageSize}`)
       .then(json => resolve(json))
       .then(null, (err) => reject(new Error()));
   });

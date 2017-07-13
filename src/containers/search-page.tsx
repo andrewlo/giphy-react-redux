@@ -5,8 +5,7 @@ import { giphySearch } from '../actions/giphy';
 
 import GifList from '../components/gif-list/gif-list';
 import SearchForm from '../components/search-form/search-form';
-import Button from '../components/button';
-import Spinner from '../components/spinner/spinner';
+import Alert from '../components/alert';
 
 import { GiphyGif } from '../types/giphy-gif';
 
@@ -56,21 +55,22 @@ class SearchPage extends React.Component<ISearchPageProps, void> {
   render() {
     const { searchResults, isLoading, isLoadingMore, hasError, canLoadMore } = this.props;
 
-    const loadMore = !isLoading && !isLoadingMore && canLoadMore && (
-      <Button className="mt2 black bg-silver col-12" onClick={ this.onNext } isLoading={ isLoadingMore }>
-        { !isLoadingMore ? 'More' : 'Loading...' }
-      </Button>);
-
-    const spinner = (isLoading || isLoadingMore) && <Spinner/>;
+    const errorAlert = (
+      <Alert isVisible={ hasError }
+        status="error">
+        Error getting search GIFs
+      </Alert>);
 
     return (
       <div className="p2">
         <SearchForm onSubmit={ this.onSubmit }
           isLoading={ isLoading }
           hasError={ hasError } />
-        <GifList list={ searchResults } />
-        { loadMore }
-        { spinner }
+        <GifList list={ searchResults }
+          isLoading={ isLoading }
+          isLoadingMore={ isLoadingMore }
+          canLoadMore={ canLoadMore }
+          onLoadMore={ this.onNext } />
       </div>
     );
 

@@ -46,7 +46,7 @@ export function giphyDetails(id: string) {
   };
 }
 
-export function giphyTrending() {
+export function giphyTrending(pageNum: number = 0) {
   return (dispatch, getState) => {
 
     return dispatch({
@@ -56,7 +56,8 @@ export function giphyTrending() {
         GIPHY_TRENDING_ERROR,
       ],
       payload: {
-        promise: trending(),
+        promise: trending(pageNum),
+        data: { pageNum }
       },
     });
   };
