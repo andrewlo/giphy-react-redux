@@ -23,16 +23,20 @@ export default function SideBar({
   };
 
   const closeStyles = {
-    cursor: 'pointer'
+    cursor: 'pointer',
+    padding: 0,
+    border: 'none',
+    backgroundColor: 'transparent',
+    fontSize: '20px',
   };
 
   return (
     <div>
-      <div className="fixed z2 top-0 bottom-0 right-0 bg-white" style={styles}>
+      <div className="fixed z2 top-0 bottom-0 right-0 bg-white" style={ styles }>
         <div className="flex justify-end p1">
-          <span style={ closeStyles } className="teal" onClick={ onClose }>
+          <button style={ closeStyles } className="teal" onClick={ onClose }>
             Close <i className="fa fa-times fa-lg"></i>
-          </span>
+          </button>
         </div>
         { children }
       </div>

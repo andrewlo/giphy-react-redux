@@ -8,6 +8,9 @@ import { giphyDetails } from '../../actions/giphy';
 import { sidebarOpen } from '../../actions/ui';
 import GifImage from '../gif-image/gif-image';
 
+const Styles =  require('./gif-list-item.css');
+
+
 interface IGifListItemProps extends React.Props<any> {
   selectGif: (id: string) => void;
   gif: GiphyGif;
@@ -32,14 +35,21 @@ function GifListItem({
     selectGif(gif.id);
   };
 
+  const image = gif.images.fixed_height;
+
   const style = {
     cursor: 'pointer',
+    padding: 0,
+    border: 'none',
+    width: `${image.width}px`,
+    height: `${image.height}px`
   };
+  const classDef = classNames(Styles['gif-list-item']);
 
   return (
-    <div onClick={ onClick } style={ style }>
-      <GifImage image={ gif.images.fixed_height } setLoadingDimensions={ true } />
-    </div>
+    <button onClick={ onClick } style={ style } className={ classDef }>
+      <GifImage image={ image } setLoadingDimensions={ true } />
+    </button>
   );
 }
 

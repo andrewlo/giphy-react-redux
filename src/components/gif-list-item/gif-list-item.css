@@ -1,0 +1,7 @@
+.gif-list-item:focus,
+.gif-list-item:hover {
+  outline: none;
+  transform: scale(1.1);
+  transition: all 0.2s;
+  z-index: 1;
+}
