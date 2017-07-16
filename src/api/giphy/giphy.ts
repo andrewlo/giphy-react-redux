@@ -1,7 +1,7 @@
 import { get } from '../server/giphy';
 
 const publicKey = 'dc6zaTOxFJmzC';
-const pageSize = 10;
+const pageSize = 20;
 
 export function search(term: string, pageNum: number = 0) {
   const offset = pageNum * pageSize;
